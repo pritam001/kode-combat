@@ -5,6 +5,8 @@ Project("{3258A634-CB97-D2E5-CD53-4F5F8FBE1CFE}") = "2DGame", "Assembly-CSharp-f
 EndProject
 Project("{3258A634-CB97-D2E5-CD53-4F5F8FBE1CFE}") = "2DGame", "Assembly-CSharp.csproj", "{8A3A7B60-0E04-E1C4-071B-6792558F2011}"
 EndProject
+Project("{3258A634-CB97-D2E5-CD53-4F5F8FBE1CFE}") = "2DGame", "Assembly-CSharp-Editor.csproj", "{88E3C0AC-7475-5DC2-6118-FF0184A351A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{8A3A7B60-0E04-E1C4-071B-6792558F2011}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A3A7B60-0E04-E1C4-071B-6792558F2011}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A3A7B60-0E04-E1C4-071B-6792558F2011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E3C0AC-7475-5DC2-6118-FF0184A351A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E3C0AC-7475-5DC2-6118-FF0184A351A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E3C0AC-7475-5DC2-6118-FF0184A351A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E3C0AC-7475-5DC2-6118-FF0184A351A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																					GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																											GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
