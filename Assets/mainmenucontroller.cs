@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.IO;
 using System.Collections;
 
 public class mainmenucontroller : MonoBehaviour {
@@ -6,6 +7,7 @@ public class mainmenucontroller : MonoBehaviour {
 	public InstantGuiButton[] mainmenu_btn;
 	public AudioClip btnclick_audio;
 	AudioSource btnaudio;
+	string filename;
 	// Use this for initialization
 	void Start () {
 		btnaudio = GetComponent<AudioSource>();
@@ -15,14 +17,27 @@ public class mainmenucontroller : MonoBehaviour {
 	void TestBtn()
 	{
 		//if (mainmenu_btn[1]==null) mainmenu_btn[1] = GetComponent(InstantGuiButton);
+		// check if any button is clicked
 		int i;
-		for(i=0;i<=5;i++){
+		for(i=0;i<mainmenu_btn.Length;i++){
 			if (mainmenu_btn[i].activated)
 			{
-				Debug.Log(mainmenu_btn.Length);
 				btnaudio.clip = btnclick_audio;
 				btnaudio.Play();
 			}
+		}
+		
+		// When start is clicked, load appropriate filename of the image and load level
+		if (mainmenu_btn[1].activated){
+			filename = Directory.GetCurrentDirectory() + "\\Assets\\Images\\1.jpg";
+			Debug.Log(filename);
+			PlayerPrefs.SetString("filename", filename);
+			Application.LoadLevel("loadnplay");
+		}
+		
+		// Exit on click
+		if (mainmenu_btn[5].activated){
+			Application.Quit();
 		}
 	}
 	// Update is called once per frame
