@@ -80,7 +80,7 @@ public class loader : MonoBehaviour {
 				Application.LoadLevel("loadnplay");
 			}
 			if(GUI.Button(new Rect(Screen.width/2 - 100,Screen.height/2 + 60, 200 ,50),"<b><color=white><size=15>Go to Main Menu</size></color></b>")){
-				//Application.LoadLevel("loadnplay");
+				Application.LoadLevel("startmenu");
 			}
 		}
 	}
