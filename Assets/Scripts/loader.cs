@@ -22,7 +22,7 @@ public class loader : MonoBehaviour {
 	public bool gameEnded = false; // Whether game is finished or not
 	public float timeLeft = 20f;	// Time left before game ends
 	public int score = 0;	// Score made
-	private float countDown = 3f;	// Count Down hits
+	private float countDown = 6f;	// Count Down hits
 	public bool gameWon = false;
 	
 	private Vector3 pos1 = Vector3.zero; // latest selected object's position 
@@ -37,12 +37,30 @@ public class loader : MonoBehaviour {
 	public Texture2D fgImage; 
 	public float healthBarLength;
 	
+	// Audio related
+	public AudioClip count_down;
+	AudioSource loader_audio;
+	float ticktimeExpired = 0.99f; // time expired till last tick
+	
+	void Awake(){
+		// Get components
+		loader_audio = GetComponent<AudioSource>();
+	}
+	
 	void OnGUI(){
+		// Do a count down when !gameOn and !gameEnded
+		// Play ticking sound as seconds value change
 		if(!gameOn && !gameEnded){
 			InitStyles();
 			// Make a background box
 			GUI.Box(new Rect(10,10,Screen.width - 20 ,Screen.height - 20), "<b><color=yellow><size=30>GAME STARTS IN</size></color></b>", boxStyle1);
 			GUI.Label(new Rect(Screen.width/2 - 30,Screen.height/2 - 30,60,60), "<b><color=red><size=50>"+Mathf.RoundToInt(countDown).ToString()+"</size></color></b>");
+			
+			if(ticktimeExpired > 1f){
+				loader_audio.clip = count_down;
+				loader_audio.Play();
+				ticktimeExpired -= 1;
+			}
 		}
 		
 		if(gameOn && !gameEnded){
@@ -69,6 +87,7 @@ public class loader : MonoBehaviour {
 			GUI.Box(new Rect(Screen.width/2 + 30 ,Screen.height - 40, Screen.width/2 - 60,30), "<b><color=yellow><size=20>Steps Taken : " + steps.ToString() + "</size></color></b>", boxStyle1);
 		}
 		
+		// After game ended Show GUI
 		if(!gameOn && gameEnded){
 			// Make a background box
 			if(gameWon == true ){
@@ -208,6 +227,7 @@ public class loader : MonoBehaviour {
 		//Before game starts
 		if(gameOn == false && gameEnded == false){
 			countDown -= Time.deltaTime;
+			ticktimeExpired += Time.deltaTime;
 			if(countDown < 0){
 				gameOn = true;
 			}
