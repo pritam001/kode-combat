@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.IO;
@@ -204,11 +205,16 @@ public class loader : MonoBehaviour {
 	
 	void AddCodeLine() {
 		int rows = Mathf.RoundToInt(cols * aspect);
+		// Read each line of the file into a string array. Each element
+        // of the array is one line of the file.
+        string[] lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Assets\\Codes\\1.txt");
 		for (int i = 0; i < rows; i++) {
 			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*46,0), Quaternion.identity) as GameObject; 
 			go.transform.SetParent(GameObject.Find("CodeCanvas").transform);
-			//go.text = "hello";
-			Debug.Log(go.GetComponents(typeof(Component))[1]);
+			Text myText;
+			myText = go.GetComponent <Text>();
+			myText.text  = lines[i];
+			
 		}
 	}
 	
