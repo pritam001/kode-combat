@@ -22,7 +22,7 @@ public class loader : MonoBehaviour {
 	public bool gameEnded = false; // Whether game is finished or not
 	public float timeLeft = 20f;	// Time left before game ends
 	public int score = 0;	// Score made
-	private float countDown = 6f;	// Count Down hits
+	private float countDown = 5f;	// Count Down hits
 	public bool gameWon = false;
 	
 	private Vector3 pos1 = Vector3.zero; // latest selected object's position 
@@ -40,7 +40,7 @@ public class loader : MonoBehaviour {
 	// Audio related
 	public AudioClip count_down;
 	AudioSource loader_audio;
-	float ticktimeExpired = 0.99f; // time expired till last tick
+	float ticktimeExpired = 0.95f; // time expired till last tick
 	
 	void Awake(){
 		// Get components
