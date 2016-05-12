@@ -43,7 +43,7 @@ public class loader : MonoBehaviour {
 	// Audio related
 	public AudioClip count_down;
 	AudioSource loader_audio;
-	float ticktimeExpired = 0.95f; // time expired till last tick
+	float ticktimeExpired = 0.85f; // time expired till last tick; use to sync tick sound and digit change
 	
 	void Awake(){
 		// Get components
