@@ -37,6 +37,9 @@ public class loader : MonoBehaviour {
 	public Texture2D fgImage; 
 	public float healthBarLength;
 	
+	// TextCode Elements
+	public GameObject TextCodePrefab;
+	
 	// Audio related
 	public AudioClip count_down;
 	AudioSource loader_audio;
@@ -156,6 +159,7 @@ public class loader : MonoBehaviour {
         tex.LoadImage(fileData);
 		mat.mainTexture = tex;
 		BuildPieces();
+		AddCodeLine();
 		randomize();
 	}
  
@@ -172,6 +176,8 @@ public class loader : MonoBehaviour {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				GameObject go = GameObject.CreatePrimitive (PrimitiveType.Quad);
+				// Gameobject named according to row number 
+				go.name = i.ToString();
 				Transform t = go.transform;
 				t.position = offset;
 				t.localScale = new Vector3(3f, 3*cols*0.99f/rows, 1f);
@@ -193,6 +199,16 @@ public class loader : MonoBehaviour {
 			}
 			offset.y += 3*cols*1f/rows + 0.01f;
 			offset.x = startX;
+		}
+	}
+	
+	void AddCodeLine() {
+		int rows = Mathf.RoundToInt(cols * aspect);
+		for (int i = 0; i < rows; i++) {
+			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*46,0), Quaternion.identity) as GameObject; 
+			go.transform.SetParent(GameObject.Find("CodeCanvas").transform);
+			//go.text = "hello";
+			Debug.Log(go.GetComponents(typeof(Component))[1]);
 		}
 	}
 	
