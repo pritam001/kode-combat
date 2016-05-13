@@ -52,7 +52,7 @@ public class ObjectLabel : MonoBehaviour {
 		}*/
 		if(target.position.y < target_curr_y){
 			//Moving down
-			obj_curr_y -= loaderScript.spaceBtwnLines;
+			obj_curr_y -= loaderScript.spaceBtwnLines*(target.position.y - target_curr_y)/(3*loaderScript.cols*1f/Mathf.RoundToInt(loaderScript.cols * loaderScript.aspect) + 0.01f);
 			Vector3 newPosition = transform.position;
 			newPosition.y = obj_curr_y;
 			transform.position = newPosition;
@@ -61,7 +61,7 @@ public class ObjectLabel : MonoBehaviour {
 			Debug.Log("Moving down");
 		} else if(target.position.y > target_curr_y) {
 			//Moving up
-			obj_curr_y += loaderScript.spaceBtwnLines;
+			obj_curr_y += loaderScript.spaceBtwnLines*(target.position.y - target_curr_y)/(3*loaderScript.cols*1f/Mathf.RoundToInt(loaderScript.cols * loaderScript.aspect) + 0.01f);
 			Vector3 newPosition = transform.position;
 			newPosition.y = obj_curr_y;
 			transform.position = newPosition;

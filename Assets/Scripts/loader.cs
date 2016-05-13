@@ -45,7 +45,7 @@ public class loader : MonoBehaviour {
 	// Audio related
 	public AudioClip count_down;
 	AudioSource loader_audio;
-	float ticktimeExpired = 0.85f; // time expired till last tick; use to sync tick sound and digit change
+	float ticktimeExpired = 0.75f; // time expired till last tick; use to sync tick sound and digit change
 	
 	void Awake(){
 		// Get components
@@ -155,7 +155,7 @@ public class loader : MonoBehaviour {
 		fgImage = MakeTex(2,2, new Color( 0f, 0f, 0f, 1f ));
 		healthBarLength = Screen.width - 40;
 		Resources.UnloadUnusedAssets();  //release the memory of previous texture loaded
-		string filepath = PlayerPrefs.GetString("filename");
+		string filepath = Directory.GetCurrentDirectory() + "\\Assets\\Images\\1.jpg";
 		byte[] fileData = File.ReadAllBytes(filepath);
         tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
