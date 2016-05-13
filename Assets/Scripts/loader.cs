@@ -40,6 +40,7 @@ public class loader : MonoBehaviour {
 	
 	// TextCode Elements
 	public GameObject TextCodePrefab;
+	public int spaceBtwnLines = 46; // Controls distance of code lines
 	
 	// Audio related
 	public AudioClip count_down;
@@ -209,12 +210,13 @@ public class loader : MonoBehaviour {
         // of the array is one line of the file.
         string[] lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Assets\\Codes\\1.txt");
 		for (int i = 0; i < rows; i++) {
-			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*46,0), Quaternion.identity) as GameObject; 
+			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*spaceBtwnLines,0), Quaternion.identity) as GameObject; 
 			go.transform.SetParent(GameObject.Find("CodeCanvas").transform);
 			Text myText;
 			myText = go.GetComponent <Text>();
 			myText.text  = lines[i];
-			
+			ObjectLabel targetScript = go.GetComponent<ObjectLabel>();
+			targetScript.target = GameObject.Find(i.ToString()).transform;
 		}
 	}
 	
