@@ -3,8 +3,10 @@ using System.IO;
 using System.Collections;
 
 public class mainmenucontroller : MonoBehaviour {
-	// Stores all the button objects
+	// Stores all the button objects to make click sound
 	public InstantGuiButton[] mainmenu_btn;
+	// Store all the save buttons
+	public InstantGuiButton[] save_btn;
 	public AudioClip btnclick_audio;
 	AudioSource btnaudio;
 	string filename;
@@ -38,6 +40,12 @@ public class mainmenucontroller : MonoBehaviour {
 		// Exit on click
 		if (mainmenu_btn[5].activated){
 			Application.Quit();
+		}
+		
+		// If Game Settings Save button is clicked
+		if (save_btn[0].activated) {
+			PlayerPrefs.SetString("difficulty", "Easy");
+			PlayerPrefs.SetString("level", "1");
 		}
 	}
 	// Update is called once per frame
