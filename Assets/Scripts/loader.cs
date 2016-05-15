@@ -23,7 +23,7 @@ public class loader : MonoBehaviour {
 	public bool gameEnded = false; // Whether game is finished or not
 	public float timeLeft = 20f;	// Time left before game ends
 	public int score = 0;	// Score made
-	private float countDown = 5f;	// Count Down hits
+	private float countDown = 3f;	// Count Down hits
 	public bool gameWon = false;
 	
 	private Vector3 pos1 = Vector3.zero; // latest selected object's position 
