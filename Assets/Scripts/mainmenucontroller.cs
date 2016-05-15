@@ -40,7 +40,7 @@ public class mainmenucontroller : MonoBehaviour {
 		// When start is clicked, load appropriate filename of the image and load level
 		if (mainmenu_btn[1].activated){
 			filename = Directory.GetCurrentDirectory() + "\\Assets\\Images\\1.jpg";
-			Debug.Log(filename);
+			//Debug.Log(filename);
 			PlayerPrefs.SetString("filename", filename);
 			Application.LoadLevel("loadnplay");
 		}

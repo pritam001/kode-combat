@@ -155,6 +155,21 @@ public class loader : MonoBehaviour {
 	
 	// Start Function
 	void Start() {
+		// Set time according to difficulty
+		if (PlayerPrefs.GetString("difficulty") == "Easy"){
+			Debug.Log("Difficulty Easy. Initializing . . .");
+			timeLeft = 60f;
+			countDown = 5f;
+		} else if (PlayerPrefs.GetString("difficulty") == "Medium"){
+			Debug.Log("Difficulty Medium. Initializing . . .");
+			timeLeft = 40f;
+			countDown = 3f;
+		} else if (PlayerPrefs.GetString("difficulty") == "Hard"){
+			Debug.Log("Difficulty Hard. Initializing . . .");
+			timeLeft = 20f;
+			countDown = 1f;
+		} 
+		// Start healthbar creation
 		bgImage = MakeTex(2,2, new Color( 1f, 0f, 0f, 1f ));
 		fgImage = MakeTex(2,2, new Color( 0f, 0f, 0f, 1f ));
 		healthBarLength = Screen.width - 40;
