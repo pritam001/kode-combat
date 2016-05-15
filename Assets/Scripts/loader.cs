@@ -303,6 +303,8 @@ public class loader : MonoBehaviour {
 					if(pos1 != pos2){
 						swap();
 						steps += 1;
+					} else { // Clicking an object twice
+						//hit1 = hit2 = null;
 					}
 					
 				}
@@ -335,11 +337,27 @@ public class loader : MonoBehaviour {
 		}
 		return 0;
 	}
+
+	public bool moving = false;// Determines if a Quad is moving right now or not
+	IEnumerator startLerping(RaycastHit hit, Vector3 pointA, Vector3 pointB, float time){
+		if (!moving) {                     // Do nothing if already moving
+	        moving = true;                 // Set flag to true
+	        float t = 0f;
+			while (t < 1.0f) {
+				t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
+				hit.transform.position = Vector3.Lerp(pointA, pointB, t); // Set position proportional to t
+				yield return null;         // Leave the routine and return here in the next frame
+			}
+			moving = false;             // Finished moving
+		}
+	}
 	
 	void swap(){
-		hit2.transform.position = pos1;
-		hit1.transform.position = pos2;
-		
+		//hit2.transform.position = pos1;
+		StartCoroutine(startLerping(hit2, hit2.transform.position, pos1, 0.2f));
+		//hit1.transform.position = pos2;
+		StartCoroutine(startLerping(hit1, hit1.transform.position, pos2, 0.2f));
+
 		// Modify current position of Matrix class after swap
 		for(int temp = 0; temp < cols*aspect; temp++){
 			try{
