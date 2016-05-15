@@ -7,6 +7,8 @@ public class mainmenucontroller : MonoBehaviour {
 	public InstantGuiButton[] mainmenu_btn;
 	// Store all the save buttons
 	public InstantGuiButton[] save_btn;
+	public InstantGuiList list_level;
+	public InstantGuiList list_difficulty;
 	public AudioClip btnclick_audio;
 	AudioSource btnaudio;
 	string filename;
@@ -44,8 +46,10 @@ public class mainmenucontroller : MonoBehaviour {
 		
 		// If Game Settings Save button is clicked
 		if (save_btn[0].activated) {
-			PlayerPrefs.SetString("difficulty", "Easy");
-			PlayerPrefs.SetString("level", "1");
+			PlayerPrefs.SetString("difficulty", list_difficulty.labels[list_difficulty.selected]);
+			Debug.Log("Set difficulty : " + list_difficulty.labels[list_difficulty.selected]);
+			PlayerPrefs.SetString("level", list_level.labels[list_level.selected]);
+			Debug.Log("Set level : " + list_level.labels[list_level.selected]);
 		}
 	}
 	// Update is called once per frame
