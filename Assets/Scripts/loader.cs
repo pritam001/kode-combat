@@ -282,22 +282,29 @@ public class loader : MonoBehaviour {
 				gameEnded = true;
 			}
 			
-			//Modify score and bar
+			// Modify score and bar
 			AdjustCurrentHealth(1);
 			
 			if (Input.GetButtonDown("Fire1")) {
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if(Physics.Raycast(ray,out hit_latest,Mathf.Infinity)){
-					//Destroy(hit1.transform.gameObject);
+					// Destroy(hit1.transform.gameObject);
 					// if 1st click in game, initialize RaycastHit objects and Vector3 positions
 					if(pos2 == Vector3.zero){
 						hit1 = hit2 = hit_latest;
 						pos1 = pos2 = hit_latest.transform.position;
+						// highlight the selected Quad
+						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
+						selected_go1.SetActive(true);
 					} else {
 						hit2 = hit1;
 						hit1 = hit_latest;
 						pos2 = pos1;
 						pos1 = hit_latest.transform.position;
+						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
+						selected_go1.SetActive(false);
+						GameObject selected_go2 = hit2.transform.Find("FrontQuad(Clone)").gameObject;
+						selected_go2.SetActive(false);
 					}
 					
 					if(pos1 != pos2){

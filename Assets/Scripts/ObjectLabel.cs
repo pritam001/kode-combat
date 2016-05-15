@@ -25,11 +25,11 @@ public class ObjectLabel : MonoBehaviour {
 	void position_initialize() {
 		// Determine the slot number (0,1,2,....) target is in
 		int loc = Mathf.RoundToInt((target.position.y + 1.5f)/(3*loaderScript.cols*1f/Mathf.RoundToInt(loaderScript.cols * loaderScript.aspect) + 0.01f));
-		Debug.Log(loc.ToString() + "  " + transform.position.y.ToString());
+		//Debug.Log(loc.ToString() + "  " + transform.position.y.ToString());
 		
 		Vector3 newPosition = transform.position;
 		newPosition.y = 440 - loc*loaderScript.spaceBtwnLines;
-		Debug.Log(loc.ToString() + "  " + newPosition.y.ToString());
+		//Debug.Log(loc.ToString() + "  " + newPosition.y.ToString());
 		transform.position = newPosition;
 	}
  
