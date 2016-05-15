@@ -3,12 +3,18 @@ using System.IO;
 using System.Collections;
 
 public class mainmenucontroller : MonoBehaviour {
+	// Settings Tabs
+	public GameObject settings_tab;
 	// Stores all the button objects to make click sound
 	public InstantGuiButton[] mainmenu_btn;
 	// Store all the save buttons
 	public InstantGuiButton[] save_btn;
+	// Store all the return buttons
+	public InstantGuiButton[] return_btn;
+	// Stores all the lists
 	public InstantGuiList list_level;
 	public InstantGuiList list_difficulty;
+	// Audio related
 	public AudioClip btnclick_audio;
 	AudioSource btnaudio;
 	string filename;
@@ -50,6 +56,13 @@ public class mainmenucontroller : MonoBehaviour {
 			Debug.Log("Set difficulty : " + list_difficulty.labels[list_difficulty.selected]);
 			PlayerPrefs.SetString("level", list_level.labels[list_level.selected]);
 			Debug.Log("Set level : " + list_level.labels[list_level.selected]);
+			save_btn[0].activated = false;
+			settings_tab.SetActive(false);
+		}
+		// If Game Settings Return button is clicked
+		if (return_btn[0].activated) {
+			return_btn[0].activated = false;
+			settings_tab.SetActive(false);
 		}
 	}
 	// Update is called once per frame
