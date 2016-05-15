@@ -29,6 +29,10 @@ public class loader : MonoBehaviour {
 	private Vector3 pos1 = Vector3.zero; // latest selected object's position 
 	private Vector3 pos2 = Vector3.zero; // last selected object's position 
 	private RaycastHit hit1, hit2, hit_latest;
+
+	// Quad animation
+	public GameObject BackQuadPrefab;
+	public GameObject FrontQuadPrefab;
 	
 	// GUI Elements
 	private GUIStyle boxStyle1 = null;
@@ -199,6 +203,19 @@ public class loader : MonoBehaviour {
 				uvs[2] = new Vector2((j + 1) * uvWidth, i * uvHeight);
 				mesh.uv = uvs;
 				offset.x += 1f;
+
+				// Create a BackQuad as child of GameObject go
+				GameObject backChild = Instantiate(BackQuadPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
+				// Static backChild ???
+				backChild.transform.parent = go.transform;
+				backChild.transform.position = go.transform.position + new Vector3(0,0,0.05f);
+				backChild.transform.localScale = new Vector3 (1.01f,1.05f,1f);
+				// Create a FrontQuad as child of GameObject go
+				GameObject frontChild = Instantiate(FrontQuadPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
+				frontChild.transform.parent = go.transform;
+				frontChild.transform.position = go.transform.position - new Vector3(0,0,0.05f);
+				frontChild.transform.localScale = new Vector3 (1f,1f,1f);
+				frontChild.SetActive(false);
 			}
 			offset.y += 3*cols*1f/rows + 0.01f;
 			offset.x = startX;
