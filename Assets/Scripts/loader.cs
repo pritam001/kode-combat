@@ -155,7 +155,8 @@ public class loader : MonoBehaviour {
 		fgImage = MakeTex(2,2, new Color( 0f, 0f, 0f, 1f ));
 		healthBarLength = Screen.width - 40;
 		Resources.UnloadUnusedAssets();  //release the memory of previous texture loaded
-		string filepath = Directory.GetCurrentDirectory() + "\\Assets\\Images\\1.jpg";
+		// Get filepath to read file according to level
+		string filepath = Directory.GetCurrentDirectory() + "\\Assets\\Images\\"+PlayerPrefs.GetString("level")+".jpg";
 		byte[] fileData = File.ReadAllBytes(filepath);
         tex = new Texture2D(2, 2);
         tex.LoadImage(fileData);
@@ -208,7 +209,7 @@ public class loader : MonoBehaviour {
 		int rows = Mathf.RoundToInt(cols * aspect);
 		// Read each line of the file into a string array. Each element
         // of the array is one line of the file.
-        string[] lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Assets\\Codes\\1.txt");
+        string[] lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Assets\\Codes\\"+PlayerPrefs.GetString("level")+".txt");
 		for (int i = 0; i < rows; i++) {
 			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*spaceBtwnLines,0), Quaternion.identity) as GameObject; 
 			go.transform.SetParent(GameObject.Find("CodeCanvas").transform);
