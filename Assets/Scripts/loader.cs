@@ -244,10 +244,12 @@ public class loader : MonoBehaviour {
         string[] lines = System.IO.File.ReadAllLines(Directory.GetCurrentDirectory() + "\\Assets\\Codes\\"+PlayerPrefs.GetString("level")+".txt");
 		for (int i = 0; i < rows; i++) {
 			GameObject go = Instantiate(TextCodePrefab, new Vector3 (520,440 - i*spaceBtwnLines,0), Quaternion.identity) as GameObject; 
+			go.name = "Code" + i.ToString();
 			go.transform.SetParent(GameObject.Find("CodeCanvas").transform);
 			Text myText;
 			myText = go.GetComponent <Text>();
-			myText.text  = lines[i];
+			// 0th object is the lowest object
+			myText.text  = lines[rows - 1 - i];
 			ObjectLabel targetScript = go.GetComponent<ObjectLabel>();
 			targetScript.target = GameObject.Find(i.ToString()).transform;
 		}
