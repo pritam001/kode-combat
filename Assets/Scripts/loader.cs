@@ -235,7 +235,7 @@ public class loader : MonoBehaviour {
 				// Add a CodeBackQuad as a child of imageQuad to select code lines by clicking
 				GameObject codeBackQuadChild = Instantiate(CodeBackQuadPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
 				codeBackQuadChild.transform.parent = go.transform;
-				codeBackQuadChild.transform.position = go.transform.position + new Vector3(3.25f,0,0.05f);
+				codeBackQuadChild.transform.position = go.transform.position + new Vector3(3.25f,0,0.05f); // controls position of CodeBackQuad
 				codeBackQuadChild.transform.localScale = new Vector3 (1f,1f,1f);
 			}
 			offset.y += 3*cols*1f/rows + 0.01f;
@@ -313,6 +313,11 @@ public class loader : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if(Physics.Raycast(ray,out hit_latest,Mathf.Infinity)){
 					Debug.Log(hit_latest.transform.gameObject.name);
+					// If CodeBackQuad is hit, hit_latest = parent(hit_latest)
+					if (hit_latest.transform.gameObject.name == "CodeBackQuad(Clone)") {
+						hit_latest = hit_latest.transform.root as RaycastHit;
+					}
+
 					// Destroy(hit1.transform.gameObject);
 					// if 1st click in game, initialize RaycastHit objects and Vector3 positions
 					if(pos2 == Vector3.zero){
@@ -331,7 +336,7 @@ public class loader : MonoBehaviour {
 						GameObject selected_go2 = hit2.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go2.SetActive(false);
 					}
-					
+
 					if(pos1 != pos2){
 						swap();
 						steps += 1;
