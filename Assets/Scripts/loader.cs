@@ -311,11 +311,13 @@ public class loader : MonoBehaviour {
 			
 			if (Input.GetButtonDown("Fire1")) {
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				raycasting_run:
 				if(Physics.Raycast(ray,out hit_latest,Mathf.Infinity)){
-					Debug.Log(hit_latest.transform.gameObject.name);
-					// If CodeBackQuad is hit, hit_latest = parent(hit_latest)
+					//Debug.Log(hit_latest.transform.gameObject.name);
+					// If CodeBackQuad is hit, rerun raycast using new ray with a new mouse position
 					if (hit_latest.transform.gameObject.name == "CodeBackQuad(Clone)") {
-						hit_latest = hit_latest.transform.root as RaycastHit;
+						ray = Camera.main.ScreenPointToRay(new Vector3(200f,Input.mousePosition.y,0f));
+						goto raycasting_run;
 					}
 
 					// Destroy(hit1.transform.gameObject);
