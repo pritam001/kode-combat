@@ -328,6 +328,9 @@ public class loader : MonoBehaviour {
 						// highlight the selected Quad
 						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go1.SetActive(true);
+						// highlight selected code line
+						GameObject selected_go_codeline_front = hit1.transform.Find("CodeBackQuad(Clone)").gameObject.transform.Find("CodeFrontQuad").gameObject;
+						selected_go_codeline_front.SetActive(true);
 					} else {
 						hit2 = hit1;
 						hit1 = hit_latest;
@@ -337,6 +340,9 @@ public class loader : MonoBehaviour {
 						selected_go1.SetActive(false);
 						GameObject selected_go2 = hit2.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go2.SetActive(false);
+						// UN-highlight selected code line
+						GameObject selected_go_codeline_front = hit2.transform.Find("CodeBackQuad(Clone)").gameObject.transform.Find("CodeFrontQuad").gameObject;
+						selected_go_codeline_front.SetActive(false);
 					}
 
 					if(pos1 != pos2){
