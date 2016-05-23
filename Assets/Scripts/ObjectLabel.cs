@@ -65,5 +65,6 @@ public class ObjectLabel : MonoBehaviour {
 			target_curr_y = target.position.y;
 			
 		}
+
 	}
 }

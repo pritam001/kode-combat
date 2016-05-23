@@ -26,13 +26,14 @@ public class loader : MonoBehaviour {
 	private float countDown = 3f;	// Count Down hits
 	public bool gameWon = false;
 	
-	private Vector3 pos1 = Vector3.zero; // latest selected object's position 
-	private Vector3 pos2 = Vector3.zero; // last selected object's position 
-	private RaycastHit hit1, hit2, hit_latest;
+	public Vector3 pos1 = Vector3.zero; // latest selected object's position 
+	public Vector3 pos2 = Vector3.zero; // last selected object's position 
+	public RaycastHit hit1, hit2, hit_latest;
 
 	// Quad animation
 	public GameObject BackQuadPrefab;
 	public GameObject FrontQuadPrefab;
+	public GameObject CodeBackQuadPrefab;
 	
 	// GUI Elements
 	private GUIStyle boxStyle1 = null;
@@ -231,12 +232,18 @@ public class loader : MonoBehaviour {
 				frontChild.transform.position = go.transform.position - new Vector3(0,0,0.05f);
 				frontChild.transform.localScale = new Vector3 (1f,1f,1f);
 				frontChild.SetActive(false);
+				// Add a CodeBackQuad as a child of imageQuad to select code lines by clicking
+				GameObject codeBackQuadChild = Instantiate(CodeBackQuadPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
+				codeBackQuadChild.transform.parent = go.transform;
+				codeBackQuadChild.transform.position = go.transform.position - new Vector3(0,0,0.05f);
+				codeBackQuadChild.transform.localScale = new Vector3 (1f,1f,1f);
 			}
 			offset.y += 3*cols*1f/rows + 0.01f;
 			offset.x = startX;
 		}
 	}
 	
+	// Add code lines that will follow image pieces as they move up and down
 	void AddCodeLine() {
 		int rows = Mathf.RoundToInt(cols * aspect);
 		// Read each line of the file into a string array. Each element
@@ -305,6 +312,7 @@ public class loader : MonoBehaviour {
 			if (Input.GetButtonDown("Fire1")) {
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if(Physics.Raycast(ray,out hit_latest,Mathf.Infinity)){
+					Debug.Log(hit_latest.transform.gameObject.name);
 					// Destroy(hit1.transform.gameObject);
 					// if 1st click in game, initialize RaycastHit objects and Vector3 positions
 					if(pos2 == Vector3.zero){
