@@ -235,7 +235,7 @@ public class loader : MonoBehaviour {
 				// Add a CodeBackQuad as a child of imageQuad to select code lines by clicking
 				GameObject codeBackQuadChild = Instantiate(CodeBackQuadPrefab, new Vector3 (0,0,0), Quaternion.identity) as GameObject;
 				codeBackQuadChild.transform.parent = go.transform;
-				codeBackQuadChild.transform.position = go.transform.position - new Vector3(0,0,0.05f);
+				codeBackQuadChild.transform.position = go.transform.position + new Vector3(3.25f,0,0.05f);
 				codeBackQuadChild.transform.localScale = new Vector3 (1f,1f,1f);
 			}
 			offset.y += 3*cols*1f/rows + 0.01f;
