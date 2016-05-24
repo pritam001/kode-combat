@@ -327,18 +327,17 @@ public class loader : MonoBehaviour {
 					if(pos2 == Vector3.zero){
 						hit1 = hit2 = hit_latest;
 						pos1 = pos2 = hit_latest.transform.position;
-						// highlight the selected Quad
+						// highlight the selected imageQuad
 						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go1.SetActive(true);
 						// highlight selected code line
-						hit1.transform.Find("CodeBackQuad(Clone)").gameObject.GetComponent<Renderer>().materials[0] = codeFrontQuadMaterial;
+						hit1.transform.Find("CodeBackQuad(Clone)").gameObject.GetComponent<Renderer>().material = codeFrontQuadMaterial;
 					} else {
 						hit2 = hit1;
 						hit1 = hit_latest;
 						pos2 = pos1;
 						pos1 = hit_latest.transform.position;
-						Debug.Log(hit1.transform.gameObject.name);
-						Debug.Log(hit2.transform.gameObject.name);
+						// If same imageQuad is clicked twice
 						if(pos1 == pos2){
 							goto doubleClick_jump;
 						}
@@ -346,9 +345,8 @@ public class loader : MonoBehaviour {
 						selected_go1.SetActive(false);
 						GameObject selected_go2 = hit2.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go2.SetActive(false);
-						/* UN-highlight selected code line
-						GameObject selected_go_codeline_front = hit2.transform.Find("CodeBackQuad(Clone)").gameObject.transform.Find("CodeFrontQuad").gameObject;
-						selected_go_codeline_front.SetActive(false);*/
+						// UN-highlight selected code line
+						hit2.transform.Find("CodeBackQuad(Clone)").gameObject.GetComponent<Renderer>().material = codeBackQuadMaterial;
 					}
 
 					doubleClick_jump:
