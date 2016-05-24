@@ -34,6 +34,8 @@ public class loader : MonoBehaviour {
 	public GameObject BackQuadPrefab;
 	public GameObject FrontQuadPrefab;
 	public GameObject CodeBackQuadPrefab;
+	public Material codeBackQuadMaterial;
+	public Material codeFrontQuadMaterial;
 	
 	// GUI Elements
 	private GUIStyle boxStyle1 = null;
@@ -329,22 +331,27 @@ public class loader : MonoBehaviour {
 						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go1.SetActive(true);
 						// highlight selected code line
-						GameObject selected_go_codeline_front = hit1.transform.Find("CodeBackQuad(Clone)").gameObject.transform.Find("CodeFrontQuad").gameObject;
-						selected_go_codeline_front.SetActive(true);
+						hit1.transform.Find("CodeBackQuad(Clone)").gameObject.GetComponent<Renderer>().materials[0] = codeFrontQuadMaterial;
 					} else {
 						hit2 = hit1;
 						hit1 = hit_latest;
 						pos2 = pos1;
 						pos1 = hit_latest.transform.position;
+						Debug.Log(hit1.transform.gameObject.name);
+						Debug.Log(hit2.transform.gameObject.name);
+						if(pos1 == pos2){
+							goto doubleClick_jump;
+						}
 						GameObject selected_go1 = hit1.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go1.SetActive(false);
 						GameObject selected_go2 = hit2.transform.Find("FrontQuad(Clone)").gameObject;
 						selected_go2.SetActive(false);
-						// UN-highlight selected code line
+						/* UN-highlight selected code line
 						GameObject selected_go_codeline_front = hit2.transform.Find("CodeBackQuad(Clone)").gameObject.transform.Find("CodeFrontQuad").gameObject;
-						selected_go_codeline_front.SetActive(false);
+						selected_go_codeline_front.SetActive(false);*/
 					}
 
+					doubleClick_jump:
 					if(pos1 != pos2){
 						swap();
 						steps += 1;
